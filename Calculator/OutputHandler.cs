@@ -20,6 +20,14 @@ namespace Calculator
         
         static List<List<string>> OutputList = new List<List<string>>();
 
+        public struct SavedData
+        {
+            public string CalcNum1;
+            public string CaclNum2;
+            public string CalcTotal;
+        }
+
+
         private static void ClearOutputLists()
         {
             FirstNum.Clear();
@@ -27,10 +35,8 @@ namespace Calculator
             Operator.Clear();
         }
         
-        static int Total = 0;
 
        
-       // public void 
 
         static List<string> GetLists(List<string> mainList){
             
@@ -135,8 +141,9 @@ namespace Calculator
 
         // A public method that returns the solution to the GUI
         public static string SendOutput(List<string> EntryList)
-        {
-            return ChooseCalcMethod(GetLists(EntryList));
+        {   string answer = ChooseCalcMethod(GetLists(EntryList));
+            
+            return answer;
         }
 
     }

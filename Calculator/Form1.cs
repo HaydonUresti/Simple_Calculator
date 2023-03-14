@@ -21,7 +21,13 @@ namespace Calculator
             InitializeComponent();
         }
 
-        
+        public struct SavedData
+        {
+            public string CalcNum1;
+            public string CaclNum2;
+            public string CalcTotal;
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -239,10 +245,26 @@ namespace Calculator
 
             //MessageBox.Show("You clicked button Calculate button!");
             string value = OutputHandler.SendOutput(EntryList);
+            SavedData data = new SavedData();
+            data.CalcTotal = value;
             textBox1.Text = value;
             EntryList.Clear();
             //value = "0";
         }
 
+
+
+        // The back button (<--)
+        private void button18_Click(object sender, EventArgs e)
+        {
+            // Make this the ANS button instead. Use a structure/Union to store the previous answer.
+            // Clear the EntryList and set the previous answer to be the first item of the Entry List
+        }
+
+        // The DELETE button (Deletes the last given element)
+        private void button19_Click(object sender, EventArgs e)
+        {
+            //Delete the last item from the EntryList
+        }
     }
 }
