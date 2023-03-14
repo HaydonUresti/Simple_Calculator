@@ -154,7 +154,7 @@ namespace Calculator
             
             string buttonSub = "-";
 
-            if (EntryList.Contains("+") || EntryList.Contains("-") || EntryList.Contains("X") || EntryList.Contains("/"))
+            if (EntryList.Contains("+") || EntryList.Contains("-") || EntryList.Contains("X") || EntryList.Contains("/") || EntryList.Contains("^"))
             {
                 MessageBox.Show("Only one operation can be done at a time!");
             }
@@ -174,7 +174,7 @@ namespace Calculator
            
             string buttonMult = "X";
 
-            if (EntryList.Contains("+") || EntryList.Contains("-") || EntryList.Contains("X") || EntryList.Contains("/"))
+            if (EntryList.Contains("+") || EntryList.Contains("-") || EntryList.Contains("X") || EntryList.Contains("/") || EntryList.Contains("^"))
             {
                 
                 MessageBox.Show("Only one operation can be done at a time!");
@@ -191,7 +191,7 @@ namespace Calculator
         {
             
             string buttonDiv = "/";
-            if (EntryList.Contains("+") || EntryList.Contains("-") || EntryList.Contains("X") || EntryList.Contains("/"))
+            if (EntryList.Contains("+") || EntryList.Contains("-") || EntryList.Contains("X") || EntryList.Contains("/") || EntryList.Contains("^"))
             {
                 MessageBox.Show("Only one operation can be done at a time!");
             }
@@ -201,6 +201,23 @@ namespace Calculator
                 EntryList.Add(buttonDiv);
             }
          
+            textBox1.Text = string.Join("", EntryList);
+        }
+
+        // The ^ (Squared) button
+        private void button17_Click(object sender, EventArgs e)
+        {
+            string buttonSquared = "^";
+            if (EntryList.Contains("+") || EntryList.Contains("-") || EntryList.Contains("X") || EntryList.Contains("/") || EntryList.Contains("^"))
+            {
+                MessageBox.Show("Only one operation can be done at a time!");
+            }
+            else
+            {
+
+                EntryList.Add(buttonSquared);
+            }
+
             textBox1.Text = string.Join("", EntryList);
         }
 
@@ -221,10 +238,11 @@ namespace Calculator
         {
 
             //MessageBox.Show("You clicked button Calculate button!");
-            string value = OutputHandler.Main(EntryList);
+            string value = OutputHandler.SendOutput(EntryList);
             textBox1.Text = value;
             EntryList.Clear();
-            value = "0";
+            //value = "0";
         }
+
     }
 }

@@ -18,26 +18,29 @@ namespace Calculator
 
         static List<string> OperationsList = new List<string>();
         
+        static List<List<string>> OutputList = new List<List<string>>();
 
+        private static void ClearOutputLists()
+        {
+            FirstNum.Clear();
+            SecondNum.Clear();
+            Operator.Clear();
+        }
         
         static int Total = 0;
 
-        static int SendOutput()
-        {
-            return OutputHandler.Total;
-        }
-
+       
        // public void 
 
-        static List<List<string>> GetLists(List<string> mainList){
+        static List<string> GetLists(List<string> mainList){
             
-            List<List<string>> itemsList = new List<List<string>>();
-            
+           List<string> itemsList = new List<string>();
+            //List<List<List<string>>> ListOfLists = new List<List<List<string>>>();
             bool operatorFound = false;
 
             foreach(var item in mainList)
             {
-                if(item == "+" || item == "-" || item == "X" || item == "/")
+                if(item == "+" || item == "-" || item == "X" || item == "/" || item == "^")
                 {
                     Operator.Add(item);
                     operatorFound = true;
@@ -51,41 +54,90 @@ namespace Calculator
                     FirstNum.Add(item);
                 }
             }
-            itemsList.Add(FirstNum);
-            itemsList.Add(Operator);
-            itemsList.Add(SecondNum);
+            itemsList.Add(string.Join("", FirstNum));
+            itemsList.Add(string.Join("", Operator));
+            itemsList.Add(string.Join("", SecondNum));
+            ClearOutputLists();
+           // ListOfLists.Add(itemsList);
             return itemsList;
         }
 
         
 
-        static float ConvertList(List<string> originalList)
+        static double ConvertList(string originalNum)
         {
             //List<int> intList = new List<int>();
 
             
 
-            return (float.Parse(string.Join("", originalList)));
+            return (double.Parse(originalNum));
         }
 
 
-        static string DoAddition(List<List<string>> list)
+        static string DoAddition(List<string> list)
         {
             return (ConvertList(list[0]) + ConvertList(list[2])).ToString();
                 
         }
-        
+
+
+        static string DoSubtraction(List<string> list)
+        {
+            return (ConvertList(list[0]) - ConvertList(list[2])).ToString();
+        }
+
+
+        static string DoMultiplication(List<string> list)
+        {
+            return (ConvertList(list[0]) * ConvertList(list[2])).ToString();
+        }
+
+        static string DoDivision(List<string> list)
+        {
+            return (ConvertList(list[0]) / ConvertList(list[2])).ToString();
+
+        }
+
+        static string DoSquared(List<string> list)
+        {
+            return Math.Pow(ConvertList(list[0]), ConvertList(list[2])).ToString();
+        }
+
+
         static void updateFirstNum()
         {
 
         }
 
-       public static string Main(List<string> mainList)
+      
+        // A method that looks at the operator value and determines the calculation that will happen.
+        private static string ChooseCalcMethod(List<string> list)
         {
-            
-            List<List<string>> fullList = GetLists(mainList);
-            //mainList.Clear();
-            return DoAddition(fullList);
+            OutputHandler.OutputList.Clear();
+            //OutputHandler.OutputList.Add(GetLists(mainList));
+
+            if (list[1] == "+")
+            {
+                return DoAddition(list);
+            } else if (list[1] == "-")
+            {
+                return DoSubtraction(list);
+            } else if (list[1] == "X") {
+                return DoMultiplication(list);
+            } else if (list[1] == "/") {
+                return DoDivision(list);
+            } else if (list[1] == "^")
+            {
+                return DoSquared(list);
+            }
+            return "ERROR!";
         }
+
+        // A public method that returns the solution to the GUI
+        public static string SendOutput(List<string> EntryList)
+        {
+            return ChooseCalcMethod(GetLists(EntryList));
+        }
+
     }
 }
