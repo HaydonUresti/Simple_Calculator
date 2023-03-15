@@ -27,7 +27,9 @@ namespace Calculator
             public string CalcTotal;
         }
 
-
+       
+        //OutputHandler.SavedData SavedDataObject = new OutputHandler.SavedData();
+        
         private static void ClearOutputLists()
         {
             FirstNum.Clear();
@@ -120,7 +122,6 @@ namespace Calculator
         private static string ChooseCalcMethod(List<string> list)
         {
             OutputHandler.OutputList.Clear();
-            //OutputHandler.OutputList.Add(GetLists(mainList));
 
             if (list[1] == "+")
             {

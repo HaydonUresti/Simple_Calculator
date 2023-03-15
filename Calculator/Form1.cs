@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,18 @@ namespace Calculator
         // The list that contains the input from the user
         public List<string> EntryList = new List<string>();
         OutputHandler Controler = new OutputHandler();
+
+
+
+
+        [System.Runtime.InteropServices.StructLayout(LayoutKind.Explicit)]
+        struct PreviousAnswer
+        {
+            [System.Runtime.InteropServices.FieldOffset(0)]
+            public string Answer;
+        }
+
+        PreviousAnswer LastAnswer = new PreviousAnswer();
 
         public Form1()
         {
@@ -236,35 +249,41 @@ namespace Calculator
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+           
 
         }
 
         // The Calculate button
         private void button16_Click(object sender, EventArgs e)
         {
-
-            //MessageBox.Show("You clicked button Calculate button!");
+            
             string value = OutputHandler.SendOutput(EntryList);
-            SavedData data = new SavedData();
-            data.CalcTotal = value;
+            LastAnswer.Answer = value;
             textBox1.Text = value;
             EntryList.Clear();
-            //value = "0";
         }
 
 
 
-        // The back button (<--)
+        // The ANS button (ANS)
         private void button18_Click(object sender, EventArgs e)
         {
             // Make this the ANS button instead. Use a structure/Union to store the previous answer.
             // Clear the EntryList and set the previous answer to be the first item of the Entry List
+           
+
+            EntryList.Clear();
+            EntryList.Add(LastAnswer.Answer);
+            textBox1.Text = string.Join("", EntryList);
         }
 
         // The DELETE button (Deletes the last given element)
+        // Deletes the last input character
         private void button19_Click(object sender, EventArgs e)
         {
-            //Delete the last item from the EntryList
+            EntryList.RemoveAt(EntryList.Count - 1);
+            textBox1.Text = string.Join("", EntryList);
+
         }
     }
 }

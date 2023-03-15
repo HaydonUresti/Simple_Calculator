@@ -66,9 +66,10 @@
             // textBox1
             // 
             this.textBox1.AccessibleName = "";
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.textBox1.Location = new System.Drawing.Point(144, 84);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(197, 20);
+            this.textBox1.Size = new System.Drawing.Size(197, 27);
             this.textBox1.TabIndex = 15;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -255,7 +256,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(61, 45);
             this.button18.TabIndex = 30;
-            this.button18.Text = "<--";
+            this.button18.Text = "ANS";
             this.button18.UseVisualStyleBackColor = false;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
