@@ -15,8 +15,6 @@ namespace Calculator
     {
         // The list that contains the input from the user
         public List<string> EntryList = new List<string>();
-        OutputHandler Controler = new OutputHandler();
-
 
 
 
@@ -26,6 +24,8 @@ namespace Calculator
             [System.Runtime.InteropServices.FieldOffset(0)]
             public string Answer;
         }
+
+     
 
         PreviousAnswer LastAnswer = new PreviousAnswer();
 
@@ -58,8 +58,7 @@ namespace Calculator
 
         // The number 2 button
         private void button2_Click(object sender, EventArgs e)
-        {
-            
+        {  
             string button2 = "2";
   
             EntryList.Add(button2);
@@ -69,7 +68,6 @@ namespace Calculator
         // The number 3 button
         private void button3_Click(object sender, EventArgs e)
         {
-           
             string button3 = "3";
 
             EntryList.Add(button3);
@@ -79,8 +77,7 @@ namespace Calculator
 
         // The number 4 button
         private void button4_Click(object sender, EventArgs e)
-        {
-            
+        {         
             string button4 = "4";
 
             EntryList.Add(button4);
@@ -89,8 +86,7 @@ namespace Calculator
 
         // The number 5 button
         private void button5_Click(object sender, EventArgs e)
-        {
-            
+        {        
             string button5 = "5";
 
             EntryList.Add(button5);
@@ -99,8 +95,7 @@ namespace Calculator
 
         // The number 6 button
         private void button6_Click(object sender, EventArgs e)
-        {
-            
+        {       
             string button6 = "6";
 
             EntryList.Add(button6);
@@ -110,8 +105,7 @@ namespace Calculator
 
         // The number 7 button
         private void button7_Click(object sender, EventArgs e)
-        {
-           
+        {      
             string button7 = "7";
 
             EntryList.Add(button7);
@@ -120,8 +114,7 @@ namespace Calculator
 
         // The number 8 button
         private void button8_Click(object sender, EventArgs e)
-        {
-           
+        {   
             string button8 = "8";
 
             EntryList.Add(button8);
@@ -131,8 +124,7 @@ namespace Calculator
 
         // The number 9 button
         private void button9_Click(object sender, EventArgs e)
-        {
-            
+        {       
             string button9 = "9";
 
             EntryList.Add(button9);
@@ -167,7 +159,7 @@ namespace Calculator
             textBox1.Text = string.Join("", EntryList);
         }
 
-        // The number - button
+        // The - button
         private void button11_Click(object sender, EventArgs e)
         {
             
@@ -187,7 +179,7 @@ namespace Calculator
             textBox1.Text = string.Join("", EntryList);
         }
 
-        // The number X (multiplication) button
+        // The X (multiplication) button
         private void button12_Click(object sender, EventArgs e)
         {
            
@@ -256,11 +248,38 @@ namespace Calculator
         // The Calculate button
         private void button16_Click(object sender, EventArgs e)
         {
-            
-            string value = OutputHandler.SendOutput(EntryList);
-            LastAnswer.Answer = value;
-            textBox1.Text = value;
-            EntryList.Clear();
+            //bool unmatched = false;
+            //List<string> previousItem = new List<string>(EntryList);
+            //previousItem.Add("e");
+            // A for loop to ensure that there in not an unmatched n symbol
+            for (int i = 1; i < EntryList.Count(); i++)
+            {
+                string currItem = EntryList[i];
+                string prevItem = EntryList[i - 1];
+
+                if (prevItem == "n" && int.TryParse(currItem, out int value) == false)
+                {
+                    MessageBox.Show("You have an unmatched 'n' symbole");
+                    return;
+                }
+            }
+
+            //string match = str.IndexOfAny(new char[] { '*', '&', '#' }) != -1
+            if (EntryList[0] == "+" || EntryList[0] == "-" || EntryList[0] == "X" || EntryList[0] == "/" || EntryList[0] == "^")
+            {
+                MessageBox.Show("The first thing you enter may not be an operation symbole.");
+            } else if (EntryList[0] == "+" || EntryList[0] == "-" || EntryList[0] == "X" || EntryList[0] == "/" || EntryList[0] == "^")
+            {
+                MessageBox.Show("The last thing you enter may not be an operation symbole.");
+            } 
+            else
+            {
+                string value = OutputHandler.SendOutput(EntryList);
+                LastAnswer.Answer = value;
+                textBox1.Text = value;
+                EntryList.Clear();
+            }
+           
         }
 
 
@@ -270,20 +289,51 @@ namespace Calculator
         {
             // Make this the ANS button instead. Use a structure/Union to store the previous answer.
             // Clear the EntryList and set the previous answer to be the first item of the Entry List
-           
+           if (LastAnswer.Equals(default(PreviousAnswer))){
+                MessageBox.Show("You must have completed an operation in order to use this.");
+            } else {
+                EntryList.Clear();
+                EntryList.Add(LastAnswer.Answer);
+                textBox1.Text = string.Join("", EntryList);
+            }
 
-            EntryList.Clear();
-            EntryList.Add(LastAnswer.Answer);
-            textBox1.Text = string.Join("", EntryList);
+            
         }
 
         // The DELETE button (Deletes the last given element)
         // Deletes the last input character
         private void button19_Click(object sender, EventArgs e)
         {
-            EntryList.RemoveAt(EntryList.Count - 1);
-            textBox1.Text = string.Join("", EntryList);
+            // Work on handling an empty EntryList
 
+            if (EntryList.Count == 0) {
+                MessageBox.Show("You must have entered input in order to use this.");
+            }
+            else
+            {
+                EntryList.RemoveAt(EntryList.Count - 1);
+                textBox1.Text = string.Join("", EntryList);
+            }
+           
+
+        }
+
+        // The negative button ( neg )
+        private void button20_Click(object sender, EventArgs e)
+        {   
+            string button5 = "n";
+
+            EntryList.Add(button5);
+            textBox1.Text = string.Join("", EntryList);
+        }
+
+        // The decimal button
+        private void button21_Click(object sender, EventArgs e)
+        {
+            string button5 = ".";
+
+            EntryList.Add(button5);
+            textBox1.Text = string.Join("", EntryList);
         }
     }
 }

@@ -16,7 +16,6 @@ namespace Calculator
         static List<string> SecondNum = new List<string>();
         static List<string> Operator = new List<string>();
 
-        static List<string> OperationsList = new List<string>();
         
         static List<List<string>> OutputList = new List<List<string>>();
 
@@ -46,12 +45,27 @@ namespace Calculator
             //List<List<List<string>>> ListOfLists = new List<List<List<string>>>();
             bool operatorFound = false;
 
+
+            int count = 0;
+
             foreach(var item in mainList)
             {
+                
                 if(item == "+" || item == "-" || item == "X" || item == "/" || item == "^")
                 {
                     Operator.Add(item);
                     operatorFound = true;
+                }
+                else if (item == "n")
+                {
+                    if (count == 0)
+                    {
+                        FirstNum.Add("-");
+                    }
+                    else { SecondNum.Add("-"); }
+                    //FirstNum.Add("-");
+
+
                 }
                 else if(operatorFound)
                 {
@@ -61,12 +75,12 @@ namespace Calculator
                 {
                     FirstNum.Add(item);
                 }
+                count++;
             }
             itemsList.Add(string.Join("", FirstNum));
             itemsList.Add(string.Join("", Operator));
             itemsList.Add(string.Join("", SecondNum));
             ClearOutputLists();
-           // ListOfLists.Add(itemsList);
             return itemsList;
         }
 
@@ -112,10 +126,7 @@ namespace Calculator
         }
 
 
-        static void updateFirstNum()
-        {
-
-        }
+      
 
       
         // A method that looks at the operator value and determines the calculation that will happen.
