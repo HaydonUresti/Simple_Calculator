@@ -1,32 +1,22 @@
 # Overview
 
-{Important! Do not say in this section that this is college assignment. Talk about what you are trying to accomplish as a software engineer to further your learning.}
+This application is a simple calculator. It is able to handle negative and floating point numbers in addition, subtraction, multiplication, division, and exponentiation. The calculator is used through the us of the mouse to click on buttons on a GUI inputting data to the calculator.
 
-{Provide a description of the software that you wrote to demonstrate the C# language.}
+My purpose for writing the app is to learn about and practice C# and the .Net framework.
 
-{Describe your purpose for writing this software.}
-
-{Provide a link to your YouTube demonstration. It should be a 4-5 minute demo of the software running and a walkthrough of the code. Focus should be on sharing what you learned about the language syntax.}
-
-[Software Demo Video](http://youtube.link.goes.here)
+[Calculator Demo](https://youtu.be/qc4qBBgCeJs)
 
 # Development Environment
 
-{Describe the tools that you used to develop the software}
-
-{Describe the programming language that you used and any libraries.}
+This app was created in Visual Studio using C# and the .Net framework.
 
 # Useful Websites
 
-{Make a list of websites that you found helpful in this project}
-
-- [Web Site Name](http://url.link.goes.here)
-- [Web Site Name](http://url.link.goes.here)
+- [W3 Schools](https://www.w3schools.com/cs/cs_conditions.php)
+- [Geeks for Geeks](https://www.geeksforgeeks.org/how-to-set-the-font-of-the-textbox-content-in-c-sharp/)
 
 # Future Work
 
-{Make a list of things that you need to fix, improve, and add in the future.}
-
-- Item 1
-- Item 2
-- Item 3
+- Implement more types of operations such as scientific operations.
+- Change the use of the Character 'n' to a '-' for the use of negatives.
+- Enable the user to use multiple operations at a time.

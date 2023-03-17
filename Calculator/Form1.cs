@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace Calculator
 {
@@ -17,7 +18,8 @@ namespace Calculator
         public List<string> EntryList = new List<string>();
 
 
-
+        // A structure that contains the previous answer.
+        // It is made a Union by the line following and third from that, which sets the variable to the same space in memory
         [System.Runtime.InteropServices.StructLayout(LayoutKind.Explicit)]
         struct PreviousAnswer
         {
@@ -26,7 +28,7 @@ namespace Calculator
         }
 
      
-
+        // Creating an instance PreviousAnswer object
         PreviousAnswer LastAnswer = new PreviousAnswer();
 
         public Form1()
@@ -124,7 +126,8 @@ namespace Calculator
 
         // The number 9 button
         private void button9_Click(object sender, EventArgs e)
-        {       
+        {
+            
             string button9 = "9";
 
             EntryList.Add(button9);
@@ -233,6 +236,7 @@ namespace Calculator
         }
 
         // The Clear button
+        // Clears the input characters
         private void button14_Click(object sender, EventArgs e)
         {
             EntryList.Clear();
@@ -245,12 +249,12 @@ namespace Calculator
 
         }
 
+
         // The Calculate button
+        // Sends the user's input to the OutputHandler
         private void button16_Click(object sender, EventArgs e)
         {
-            //bool unmatched = false;
-            //List<string> previousItem = new List<string>(EntryList);
-            //previousItem.Add("e");
+            
             // A for loop to ensure that there in not an unmatched n symbol
             for (int i = 1; i < EntryList.Count(); i++)
             {
@@ -264,7 +268,7 @@ namespace Calculator
                 }
             }
 
-            //string match = str.IndexOfAny(new char[] { '*', '&', '#' }) != -1
+            // Ensure there is not an unmatched operation character at the beggining or end of the user's input
             if (EntryList[0] == "+" || EntryList[0] == "-" || EntryList[0] == "X" || EntryList[0] == "/" || EntryList[0] == "^")
             {
                 MessageBox.Show("The first thing you enter may not be an operation symbole.");
@@ -285,27 +289,24 @@ namespace Calculator
 
 
         // The ANS button (ANS)
+        // Changes and sets the current input to the last generated answer 
         private void button18_Click(object sender, EventArgs e)
         {
-            // Make this the ANS button instead. Use a structure/Union to store the previous answer.
-            // Clear the EntryList and set the previous answer to be the first item of the Entry List
+            // The if statement ensures that there is a previous answer in order to avoid an error
            if (LastAnswer.Equals(default(PreviousAnswer))){
                 MessageBox.Show("You must have completed an operation in order to use this.");
             } else {
                 EntryList.Clear();
                 EntryList.Add(LastAnswer.Answer);
                 textBox1.Text = string.Join("", EntryList);
-            }
-
-            
+            }     
         }
 
         // The DELETE button (Deletes the last given element)
         // Deletes the last input character
         private void button19_Click(object sender, EventArgs e)
         {
-            // Work on handling an empty EntryList
-
+            // The if statement ensures the input list is not empty
             if (EntryList.Count == 0) {
                 MessageBox.Show("You must have entered input in order to use this.");
             }
@@ -314,11 +315,9 @@ namespace Calculator
                 EntryList.RemoveAt(EntryList.Count - 1);
                 textBox1.Text = string.Join("", EntryList);
             }
-           
-
         }
 
-        // The negative button ( neg )
+        // The negative button ( NEG )
         private void button20_Click(object sender, EventArgs e)
         {   
             string button5 = "n";

@@ -8,8 +8,8 @@ using System.Windows.Forms;
 
 namespace Calculator
 {
-
-     class OutputHandler
+    // --------A class that handles the user's input and solves the given operation--------//
+    class OutputHandler
     {
 
         static List<string> FirstNum = new List<string>();
@@ -38,16 +38,19 @@ namespace Calculator
         
 
        
-
+        // A method that takes the input list and sorts it into lists of the parts of the operation
+        // Parameters: mainList - A lsit containing the input fron the user
+        // Returns: itemList - A list containing the separated parts of the operation
         static List<string> GetLists(List<string> mainList){
             
            List<string> itemsList = new List<string>();
-            //List<List<List<string>>> ListOfLists = new List<List<List<string>>>();
+           
             bool operatorFound = false;
 
 
             int count = 0;
 
+           
             foreach(var item in mainList)
             {
                 
@@ -63,7 +66,7 @@ namespace Calculator
                         FirstNum.Add("-");
                     }
                     else { SecondNum.Add("-"); }
-                    //FirstNum.Add("-");
+                    
 
 
                 }
@@ -85,41 +88,51 @@ namespace Calculator
         }
 
         
-
+        // A method that converts given strings into double types
+        // Parameters: originalNum - The string type version of a number
+        // Returns: A double type of the given string type
         static double ConvertList(string originalNum)
         {
-            //List<int> intList = new List<int>();
-
-            
-
             return (double.Parse(originalNum));
         }
 
-
+        // A method that adds the given data
+        // Parameters: list - the user's input
+        // Returns: A string version of the added data
         static string DoAddition(List<string> list)
         {
             return (ConvertList(list[0]) + ConvertList(list[2])).ToString();
                 
         }
 
-
+        // A method that subtracts the given data
+        // Parameters: list - the user's input
+        // Returns: A string version of the subtracted data
         static string DoSubtraction(List<string> list)
         {
             return (ConvertList(list[0]) - ConvertList(list[2])).ToString();
         }
 
-
+        // A method that multiplies the given data
+        // Parameters: list - the user's input
+        // Returns: A string version of the multiplied data
         static string DoMultiplication(List<string> list)
         {
             return (ConvertList(list[0]) * ConvertList(list[2])).ToString();
         }
 
+        // A method that divides the given data
+        // Parameters: list - the user's input
+        // Returns: A string version of the divided data
         static string DoDivision(List<string> list)
         {
             return (ConvertList(list[0]) / ConvertList(list[2])).ToString();
 
         }
 
+        // A method that raises the power of the given data
+        // Parameters: list - the user's input
+        // Returns: A string version of the new data
         static string DoSquared(List<string> list)
         {
             return Math.Pow(ConvertList(list[0]), ConvertList(list[2])).ToString();
@@ -127,9 +140,9 @@ namespace Calculator
 
 
       
-
-      
         // A method that looks at the operator value and determines the calculation that will happen.
+        // Parameters: list - The sorted version of the user's input
+        // Returns: The correct operation based on the sorted list
         private static string ChooseCalcMethod(List<string> list)
         {
             OutputHandler.OutputList.Clear();
@@ -152,6 +165,8 @@ namespace Calculator
         }
 
         // A public method that returns the solution to the GUI
+        // Parameters: EntryList - The user's input
+        // Returns: The answrt of the operation
         public static string SendOutput(List<string> EntryList)
         {   string answer = ChooseCalcMethod(GetLists(EntryList));
             
