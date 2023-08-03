@@ -32,7 +32,7 @@ To perform a calculation, begin by inputting the first number of the operation. 
 ## Recall Answers 
 The previous answer may be recalled to operate on by clicking the "ANS" button. This will then display the previously calculated number. 
 
-## DELETE Characters 
+## Delete Characters 
 Characters may be deleted individually by clicking the "DELETE" button. Doing so will delete the previously entered character on the display. To delete all characters on the display, click the "Clear" button.
 
 ## Special Numbers
