@@ -139,7 +139,7 @@ namespace Calculator
         }
 
 
-      
+
         // A method that looks at the operator value and determines the calculation that will happen.
         // Parameters: list - The sorted version of the user's input
         // Returns: The correct operation based on the sorted list
@@ -147,20 +147,28 @@ namespace Calculator
         {
             OutputHandler.OutputList.Clear();
 
-            if (list[1] == "+")
+            string operation = list[1];
+
+            switch (operation)
             {
-                return DoAddition(list);
-            } else if (list[1] == "-")
-            {
-                return DoSubtraction(list);
-            } else if (list[1] == "X") {
-                return DoMultiplication(list);
-            } else if (list[1] == "/") {
-                return DoDivision(list);
-            } else if (list[1] == "^")
-            {
-                return DoSquared(list);
+
+                case "+":
+                    return (ConvertList(list[0]) + ConvertList(list[2])).ToString();
+
+                case "-":
+                    return (ConvertList(list[0]) - ConvertList(list[2])).ToString();
+
+                case "X":
+                    return (ConvertList(list[0]) * ConvertList(list[2])).ToString();
+
+                case "/":
+                    return (ConvertList(list[0]) / ConvertList(list[2])).ToString();
+
+                case "^":
+                    return Math.Pow(ConvertList(list[0]), ConvertList(list[2])).ToString();
             }
+
+
             return "ERROR!";
         }
 
